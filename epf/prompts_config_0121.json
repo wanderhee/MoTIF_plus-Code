@@ -17,7 +17,7 @@
   "event_level_map": {
     "1": "严重",
     "2": "一般",
-    "3": "一般"
+    "3": "轻微"
   },
   
   "special_event_prompts": {

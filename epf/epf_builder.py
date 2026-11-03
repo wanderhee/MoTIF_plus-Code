@@ -221,6 +221,7 @@ class EPFBuilder:
 {
   "has_accident": true/false,
   "accident_type": "事件类型；无事件时必须为无事件",
+  "event_level": "事件等级：严重/一般/轻微；无事件时填写无",
   "highway_info": "高速代码+名称+桩号，例如G22青兰高速K081+154；不要添加省份前缀",
   "event_description": "事件或正常交通状况的详细描述",
   "vehicles_info": "车辆类型、颜色、特征、车牌（可见时）等；无事件时说明车辆正常通行",

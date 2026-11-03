@@ -85,7 +85,7 @@ class AlignDataset(Dataset):
 def itc_loss(vis: torch.Tensor, txt: torch.Tensor, temperature: float) -> torch.Tensor:
     vis = F.normalize(vis, dim=-1)
     txt = F.normalize(txt, dim=-1)
-    logits = (vis @ txt.t()) / temperature  # [B, B]
+    logits = (vis @ txt.t()) / temperature
     labels = torch.arange(vis.shape[0], device=vis.device)
     return (F.cross_entropy(logits, labels) + F.cross_entropy(logits.t(), labels)) / 2
 
@@ -160,14 +160,14 @@ def main():
                 else proc["pixel_values"]
             ).to(device)
 
-            query = model.forward_qformer(pixel_values)          # [B, nq, d_q]
-            vis_emb = vis_proj(query.mean(dim=1))                # [B, contrast]
+            query = model.forward_qformer(pixel_values)
+            vis_emb = vis_proj(query.mean(dim=1))
 
             text_tok = tokenizer(
                 texts, padding=True, truncation=True,
                 max_length=args.max_length, return_tensors="pt",
             ).to(device)
-            text_emb = model.llm.get_input_embeddings()(text_tok.input_ids)  # [B, L, d_llm]
+            text_emb = model.llm.get_input_embeddings()(text_tok.input_ids)
             mask = text_tok.attention_mask.unsqueeze(-1).float()
             txt_emb = txt_proj((text_emb * mask).sum(1) / mask.sum(1).clamp(min=1))
 

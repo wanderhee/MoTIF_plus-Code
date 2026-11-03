@@ -91,10 +91,11 @@ class PromptManager:
         structured_prompt = f"""{event_specific_prompt}
 
 【输出格式要求】
-请严格按以下JSON格式输出分析结果，所有字段值都必须是字符串类型：
+请严格按以下JSON格式输出分析结果，除 has_accident 为布尔值外，其余字段值都必须是字符串类型：
 {{
     "has_accident": true/false,
     "accident_type": "填写事件类型：异常停车/非机动车闯入/行人闯入/无事件",
+    "event_level": "事件等级：严重/一般/轻微；无事件时填写无",
     "highway_info": "高速公路信息，格式必须为：高速代码+名称+桩号，如：G22青兰高速K081+154",
     "event_description": "详细的事件描述（如果无事件，请描述正常交通状况）",
     "vehicles_info": "车辆信息描述",
@@ -104,7 +105,7 @@ class PromptManager:
     "environment_condition": "环境状况描述，格式必须为：天气:[描述]，能见度:[描述]，光照:[描述]",
     "queue_situation": "排队情况描述",
     "summary": "事件总结和分析建议",
-    "event_time": "从视频/图片中识别的事件发生时间，格式：YYYY-MM-%d HH:MM:SS"
+    "event_time": "从视频/图片中识别的事件发生时间，格式：YYYY-MM-DD HH:MM:SS"
 }}
 
 【字段内容要素要求】

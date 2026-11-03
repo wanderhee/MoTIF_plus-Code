@@ -1,8 +1,6 @@
 train: /home/buaa/sh/ShangaoED/data/ShangaoED_data/dataSet_path/train.txt
 val: /home/buaa/sh/ShangaoED/data/ShangaoED_data/dataSet_path/val.txt
 
-#number of classes
-nc: 3
+nc: 8
 
-#class names
-names: ["car","truck","people"]
+names: ["car","truck","people","bike","motorcycle","tricycle","excavator","e-bike"]
