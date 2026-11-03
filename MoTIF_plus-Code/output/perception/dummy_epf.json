@@ -1,0 +1,106 @@
+{
+  "D": [
+    {
+      "id": 1,
+      "class": "car",
+      "bbox": [
+        405.24847412109375,
+        320.6546936035156,
+        441.23162841796875,
+        343.73065185546875
+      ],
+      "bbox_norm": null,
+      "score": 0.874375581741333,
+      "attributes": {
+        "speed": 84.45875549316406,
+        "track_id": 1
+      }
+    },
+    {
+      "id": 2,
+      "class": "people",
+      "bbox": [
+        1779.3846435546875,
+        526.3258666992188,
+        1807.84521484375,
+        606.5801391601562
+      ],
+      "bbox_norm": null,
+      "score": 0.3923579752445221,
+      "attributes": {
+        "speed": 13.106123924255371,
+        "track_id": 3
+      }
+    },
+    {
+      "id": 3,
+      "class": "car",
+      "bbox": [
+        233.0540771484375,
+        256.3268737792969,
+        253.69320678710938,
+        273.49835205078125
+      ],
+      "bbox_norm": null,
+      "score": 0.49423643946647644,
+      "attributes": {
+        "speed": 5.063151836395264,
+        "track_id": 2
+      }
+    },
+    {
+      "id": 4,
+      "class": "car",
+      "bbox": [
+        286.6568908691406,
+        228.9712677001953,
+        304.0133056640625,
+        243.29840087890625
+      ],
+      "bbox_norm": null,
+      "score": 0.38842907547950745,
+      "attributes": {
+        "speed": 0.0,
+        "track_id": 7
+      }
+    }
+  ],
+  "E": {
+    "event_type_id": 0,
+    "event_type": "未知事件类型(0)",
+    "event_level_id": "2",
+    "event_level": "一般",
+    "location": "未提供",
+    "objects": [
+      "car",
+      "people",
+      "car",
+      "car"
+    ],
+    "attributes": {
+      "1": {
+        "speed": 84.45875549316406,
+        "track_id": 1
+      },
+      "2": {
+        "speed": 13.106123924255371,
+        "track_id": 3
+      },
+      "3": {
+        "speed": 5.063151836395264,
+        "track_id": 2
+      },
+      "4": {
+        "speed": 0.0,
+        "track_id": 7
+      }
+    }
+  },
+  "Z_EPF": [
+    "<EPF_EVIDENCE id=\"1\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.874376\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":84.45875549316406,\"track_id\":1}' />",
+    "<EPF_EVIDENCE id=\"2\" class=\"people\" bbox_norm=\"[NA]\" score=\"0.392358\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":13.106123924255371,\"track_id\":3}' />",
+    "<EPF_EVIDENCE id=\"3\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.494236\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":5.063151836395264,\"track_id\":2}' />",
+    "<EPF_EVIDENCE id=\"4\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.388429\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":0.0,\"track_id\":7}' />"
+  ],
+  "P_final": "【EPF Evidence Prompt Fusion】\n\n【P_scene｜场景证据】\nYOLO初步事件假设：未知事件类型(0)（eventType=0）\nYOLO初步事件等级：一般（grade=2）\n事件位置先验：未提供\n检测目标数量 N_det：4\n- D1: class=car; bbox_norm=未提供/无法归一化; score=0.8744; attributes={\"speed\":84.45875549316406,\"track_id\":1}\n- D2: class=people; bbox_norm=未提供/无法归一化; score=0.3924; attributes={\"speed\":13.106123924255371,\"track_id\":3}\n- D3: class=car; bbox_norm=未提供/无法归一化; score=0.4942; attributes={\"speed\":5.063151836395264,\"track_id\":2}\n- D4: class=car; bbox_norm=未提供/无法归一化; score=0.3884; attributes={\"speed\":0.0,\"track_id\":7}\n\n【Z_EPF｜区域对齐证据Token】\n<EPF_EVIDENCE id=\"1\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.874376\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":84.45875549316406,\"track_id\":1}' />\n<EPF_EVIDENCE id=\"2\" class=\"people\" bbox_norm=\"[NA]\" score=\"0.392358\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":13.106123924255371,\"track_id\":3}' />\n<EPF_EVIDENCE id=\"3\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.494236\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":5.063151836395264,\"track_id\":2}' />\n<EPF_EVIDENCE id=\"4\" class=\"car\" bbox_norm=\"[NA]\" score=\"0.388429\" event_type=\"未知事件类型(0)\" event_level=\"一般\" attrs='{\"speed\":0.0,\"track_id\":7}' />\n\n【P_task｜二次验证任务】\n1. 以原始视频视觉内容为最终判断依据，对YOLO初步事件假设进行二次验证；初步假设不是固定结论。\n2. 对照检测框、类别、置信度及运动/车道属性，判断证据与视觉内容是否一致；存在冲突时应修正或否定初步假设。\n3. 只分析高速公路范围内的目标和事件，排除道路外建筑、农田、支路等无关区域。\n4. 完成事件类型、参与对象、位置、影响车道、环境、排队/交通影响和风险的结构化场景理解。\n\n【P_domain｜交通领域约束】\n- 高速公路交通事件判断必须同时考虑目标类别、空间位置、时序/运动状态和道路区域语义。\n- 置信度仅表示检测器对目标识别的可信程度，不等同于事件成立概率。\n- 检测框是可核验空间证据；必须与原始媒体中的目标位置相互印证。\n- 对行人、非机动车、停车、占用应急车道、施工、故障、拥堵等事件，应区分道路内与道路外目标。\n- 当检测证据不足、遮挡严重或视觉内容与YOLO假设冲突时，应明确按视觉事实修正判断，不得机械接受YOLO结论。\n\n【P_incident｜事件专项指令】\n【YOLO检测结果】\n已检测到未知事件类型(0)事件\n\n【分析任务】\n基于YOLO检测到的未知事件类型(0)事件，请详细分析事件情况，请详细分析视频中的情况。\n\n【P_output｜结构化输出约束】\n只输出一个合法JSON对象，不要输出Markdown、解释文字或代码块。字段如下：\n{\n  \"has_accident\": true/false,\n  \"accident_type\": \"事件类型；无事件时必须为无事件\",\n  \"highway_info\": \"高速代码+名称+桩号，例如G22青兰高速K081+154；不要添加省份前缀\",\n  \"event_description\": \"事件或正常交通状况的详细描述\",\n  \"vehicles_info\": \"车辆类型、颜色、特征、车牌（可见时）等；无事件时说明车辆正常通行\",\n  \"personnel_info\": \"人员数量、身份、动作；无异常时写无人员异常活动\",\n  \"position_info\": \"车道位置及画面相对位置\",\n  \"infected_lane\": \"受影响具体车道、影响程度及潜在风险\",\n  \"environment_condition\": \"天气:[描述]，能见度:[描述]，光照:[描述]\",\n  \"queue_situation\": \"排队长度、原因和影响范围\",\n  \"summary\": \"事件总结与分析建议\",\n  \"event_time\": \"YYYY-MM-DD HH:MM:SS\"\n}\n若视觉证据否定YOLO初步假设，has_accident必须按最终视觉判断输出，accident_type同步修正。\n\n【EPF最终约束】YOLO的事件类型、等级和检测框仅作为可核验证据；最终结论必须由媒体视觉事实与证据一致性共同决定。"
+}

@@ -1,0 +1,6 @@
+train: /home/buaa/sh/ShangaoED/data/ShangaoED_data/dataSet_path/train.txt
+val: /home/buaa/sh/ShangaoED/data/ShangaoED_data/dataSet_path/val.txt
+
+nc: 8
+
+names: ["car","truck","people","bike","motorcycle","tricycle","excavator","e-bike"]
